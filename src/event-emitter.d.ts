@@ -1,53 +1,53 @@
 declare type EventName = string | symbol;
 
 export declare interface EventListenable<
-    ListenerMap extends Record<EventName, (...args : any) => any> = Record<EventName, (...args : any) => any>
+    ListenerMap extends Record<EventName, (...args : any[]) => any> = Record<EventName, (...args : any[]) => any>
 >
 {
-    addListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    addListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    removeListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    removeListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    on(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    on<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    once(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    once<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    off(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    off<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 }
 
 export declare interface EventListenerPrependable<
-    ListenerMap extends Record<EventName, (...args : any) => any> = Record<EventName, (...args : any) => any>
+    ListenerMap extends Record<EventName, (...args : any[]) => any> = Record<EventName, (...args : any[]) => any>
 >
     extends EventListenable<ListenerMap>
 {
-    prependListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    prependListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    prependOnceListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    prependOnceListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 }
 
 export declare class EventEmitter<
-    ListenerMap extends Record<EventName, (...args : any) => any> = Record<EventName, (...args : any) => any>
+    ListenerMap extends Record<EventName, (...args : any[]) => any> = Record<EventName, (...args : any[]) => any>
 >
     implements EventListenerPrependable<ListenerMap>
 {
@@ -67,66 +67,75 @@ export declare class EventEmitter<
 
     public eventNames() : (keyof ListenerMap)[];
 
-    public listenerCount(
-        eventName : (keyof ListenerMap)
+    public listenerCount<K extends keyof ListenerMap>(
+        eventName : K
     ) : number;
 
-    public listeners(
-        eventName : (keyof ListenerMap)
-    ) : ((...args : any) => any)[];
+    public listeners<K extends keyof ListenerMap>(
+        eventName : K
+    ) : (ListenerMap[K])[];
 
-    public rawListeners(
-        eventName : (keyof ListenerMap)
-    ) : ((...args : any) => any)[];
+    public rawListeners<K extends keyof ListenerMap>(
+        eventName : K
+    ) : (ListenerWrapper<ListenerMap[K]>)[];
 
-    public prependListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    public prependListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    public prependOnceListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    public prependOnceListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    public addListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    public addListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    public removeListener(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    public removeListener<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    public removeAllListeners(
-        eventName? : (keyof ListenerMap)
+    public removeAllListeners<K extends keyof ListenerMap>(
+        eventName? : K
     ) : this;
 
-    public on(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    public on<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    public once(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    public once<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    public off(
-        eventName : (keyof ListenerMap),
-        listener : ListenerMap[(keyof ListenerMap)]
+    public off<K extends keyof ListenerMap>(
+        eventName : K,
+        listener : ListenerMap[K]
     ) : this;
 
-    public emit(
-        eventName : (keyof ListenerMap),
-        ...args : Parameters<ListenerMap[(keyof ListenerMap)]>
+    public emit<K extends keyof ListenerMap>(
+        eventName : K,
+        ...args : Parameters<ListenerMap[K]>
     ) : boolean;
 
-    public emitAndGetResults(
-        eventName : (keyof ListenerMap),
-        ...args : Parameters<ListenerMap[(keyof ListenerMap)]>
-    ) : ReturnType<ListenerMap[(keyof ListenerMap)]>[];
+    public emitAndGetResults<K extends keyof ListenerMap>(
+        eventName : K,
+        ...args : Parameters<ListenerMap[K]>
+    ) : (ReturnType<ListenerMap[K]>)[];
+}
+
+export declare interface ListenerWrapper<
+    Listener extends (...args : any[]) => any = (...args : any[]) => any
+>
+{
+    (...args : Parameters<Listener>) : ReturnType<Listener>;
+
+    listener : Listener;
 }
 
 export declare interface EventEmitterOption
