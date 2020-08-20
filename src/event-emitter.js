@@ -454,7 +454,7 @@ module.exports = (function ()
         var listeners = _getListeners(thisRef, eventName, true);
         var count = listeners.length;
         var maxCount = thisRef.getMaxListeners();
-        if(!_isCountInfinite(count) && count >= maxCount)
+        if(!_isCountInfinite(maxCount) && count >= maxCount)
         {
             if(shouldStrict)
             {
