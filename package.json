@@ -1,17 +1,37 @@
 {
     "name": "kaphein-js-event-emitter",
     "version": "0.1.1",
-    "description": "",
-    "main": "src/index.js",
+    "description": "A custom event emitter based on EventEmitter class on Node.js.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "lint": "tsc --project tsconfig.dts.json && eslint src/**/*.js",
         "lint:fix": "npm run lint -- --fix",
-        "test": "mocha tests/**/*.test.js",
+        "test": "mocha tests/index.test.js",
         "build": "rm -rf dist && npm run lint && webpack --mode production --config webpack.config.js",
         "prepack": "npm install && npm run build"
     },
-    "author": "Hydrawisk793",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Hydrawisk793/kaphein-js-event-emitter.git"
+    },
+    "keywords": [
+        "isomorphic",
+        "node",
+        "browser",
+        "events",
+        "event-emitter"
+    ],
+    "author": "Hydrawisk793 <hyw793@gmail.com>",
     "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Hydrawisk793/kaphein-js-event-emitter/issues"
+    },
+    "homepage": "https://github.com/Hydrawisk793/kaphein-js-event-emitter#readme",
+    "bundleDependencies": [],
     "dependencies": {},
     "devDependencies": {
         "chai": "^4.2.0",
