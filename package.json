@@ -1,6 +1,6 @@
 {
     "name": "kaphein-js-event-emitter",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "A custom event emitter based on EventEmitter class on Node.js.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
