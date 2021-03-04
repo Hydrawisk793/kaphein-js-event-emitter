@@ -456,17 +456,17 @@ module.exports = (function ()
         var maxCount = thisRef.getMaxListeners();
         if(!_isCountInfinite(maxCount) && count >= maxCount)
         {
+            var warnMsg = count + " listeners have been added on event " + eventName + ". The maximum number of listeners per event is " + maxCount + ".";
             if(shouldStrict)
             {
-                throw new Error("The maximum number of listeners per event is " + maxCount + ".");
+                throw new Error(warnMsg);
             }
             else if(warnIfExceeds)
             {
-                (
-                    ("undefined" !== typeof console && "function" === typeof console.warn)
-                        ? console.warn("The maximum number of listeners per event is " + maxCount + ".")
-                        : void 0
-                );
+                if("undefined" !== typeof console && "function" === typeof console.warn)
+                {
+                    console.warn(warnMsg);
+                }
             }
         }
 
