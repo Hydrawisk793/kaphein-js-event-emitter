@@ -26,7 +26,8 @@ module.exports = (function ()
                 xEmitRemoveListenerEvent : true,
                 xPreventDuplicateListeners : false,
                 xStrictMaxListenerCount : false,
-                xWarnIfMaxListenerCountExceeds : true
+                xWarnIfMaxListenerCountExceeds : true,
+                xPassRawListenerOnRemoveListenerEvent : false
             },
             arguments[0]
         );
@@ -350,15 +351,22 @@ module.exports = (function ()
                 delete thisRef._map[eventName];
             }
 
-            if(thisRef._option.xEmitRemoveListenerEvent)
+            var option = thisRef._option;
+            if(option.xEmitRemoveListenerEvent)
             {
                 thisRef.emit(
                     "removeListener",
                     eventName,
                     (
-                        "function" === typeof removed.listener
-                            ? removed.listener
-                            : removed
+                        option.xPassRawListenerOnRemoveListenerEvent
+                            ? removed
+                            : (
+                                (
+                                    "function" === typeof removed.listener
+                                        ? removed.listener
+                                        : removed
+                                )
+                            )
                     )
                 );
             }

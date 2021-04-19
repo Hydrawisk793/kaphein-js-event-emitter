@@ -159,4 +159,6 @@ export declare interface EventEmitterOption
     xWarnIfMaxListenerCountExceeds : boolean;
 
     xStrictMaxListenerCount : boolean;
+
+    xPassRawListenerOnRemoveListenerEvent : boolean;
 }
