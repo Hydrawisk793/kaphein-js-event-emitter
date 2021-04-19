@@ -84,7 +84,10 @@ module.exports = function ()
     it("should be emitted.", function ()
     {
         const nodeLogs = doTest(new NodeEventEmitter());
-        const logs = doTest(new EventEmitter());
+        const logs = doTest(new EventEmitter({
+            // Since Node.js v12
+            xPassRawListenerOnRemoveListenerEvent : true,
+        }));
 
         assert.deepStrictEqual(logs, nodeLogs);
     });
