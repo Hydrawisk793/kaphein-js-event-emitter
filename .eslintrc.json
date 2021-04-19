@@ -16,6 +16,11 @@
     },
     "plugins": [],
     "settings" : {},
+    "ignorePatterns": [
+        "dist",
+        "node_modules",
+        "**/node_modules/*"
+    ],
     "rules": {
         "quotes": ["error", "double"],
         "brace-style" : ["error", "allman"],
