@@ -2,22 +2,13 @@
     "name": "kaphein-js-event-emitter",
     "version": "0.1.3",
     "description": "A custom event emitter based on EventEmitter class on Node.js.",
+    "author": "Hydrawisk793 <hyw793@gmail.com>",
+    "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
-    "scripts": {
-        "lint": "tsc --project tsconfig.dts.json && eslint src/**/*.js",
-        "lint:fix": "npm run lint -- --fix",
-        "test": "mocha tests/index.test.js",
-        "build": "rm -rf dist && npm run lint && webpack --mode production --config webpack.config.js",
-        "prepack": "npm install && npm run build"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Hydrawisk793/kaphein-js-event-emitter.git"
-    },
     "keywords": [
         "isomorphic",
         "node",
@@ -25,12 +16,21 @@
         "events",
         "event-emitter"
     ],
-    "author": "Hydrawisk793 <hyw793@gmail.com>",
-    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Hydrawisk793/kaphein-js-event-emitter.git"
+    },
     "bugs": {
         "url": "https://github.com/Hydrawisk793/kaphein-js-event-emitter/issues"
     },
     "homepage": "https://github.com/Hydrawisk793/kaphein-js-event-emitter#readme",
+    "scripts": {
+        "lint": "tsc --project tsconfig.dts.json && eslint src/**/*.js",
+        "lint:fix": "npm run lint -- --fix",
+        "test": "mocha tests/index.test.js",
+        "build": "rm -rf dist && npm run lint && webpack --mode production --config webpack.config.js",
+        "prepack": "npm install && npm run build"
+    },
     "bundledDependencies": [],
     "dependencies": {},
     "devDependencies": {
